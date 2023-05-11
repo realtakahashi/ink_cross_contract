@@ -1,5 +1,5 @@
 [package]
-name = "flipper_1"
+name = "increment"
 version = "0.1.0"
 authors = ["[your_name] <[your_email]>"]
 edition = "2021"
@@ -9,8 +9,6 @@ ink = { version = "4.0.0-rc", default-features = false }
 
 scale = { package = "parity-scale-codec", version = "3", default-features = false, features = ["derive"] }
 scale-info = { version = "2.3", default-features = false, features = ["derive"], optional = true }
-flipper_interface = { version = "0.1.0", path = "../flipper_interface", default-features = false, features = ["ink-as-dependency"] }
-increment = { version = "0.1.0", path = "../increment", default-features = false, features = ["ink-as-dependency"] }
 
 [lib]
 path = "lib.rs"

@@ -2,7 +2,8 @@
 
 #[ink::contract]
 mod flipper_1 {
-    use flipper_interface::flipper_interface::FlipperInterfaceRef;
+    use flipper_interface::FlipperInterfaceRef;
+    use increment::IncrementRef;
 
     /// Defines the storage of your contract.
     /// Add new fields to the below struct in order
@@ -54,6 +55,20 @@ mod flipper_1 {
         pub fn other_contract_get(&self, flipper:AccountId) -> bool {
             let interface: FlipperInterfaceRef = ink::env::call::FromAccountId::from_account_id(flipper);
             interface.get()
+        }
+
+        #[ink(message)]
+        pub fn select_call(&mut self, flipper:AccountId, increment:AccountId, is_flipper_call:bool) {
+            match is_flipper_call {
+                true => {
+                    let mut interface: FlipperInterfaceRef = ink::env::call::FromAccountId::from_account_id(flipper);
+                    interface.flip();
+                },
+                false => {
+                    let mut interface: IncrementRef = ink::env::call::FromAccountId::from_account_id(increment);
+                    interface.inc(5);
+                }
+            }
         }
 
     }
